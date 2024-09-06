@@ -17,7 +17,7 @@ Examples:
 
 ## How it Works
 
-<img src="/image/flatimage-portal.png"/>
+<img src="https://raw.githubusercontent.com/flatimage/docs/master/docs/image/flatimage-portal.png"/>
 
 Three FIFOs are created, for `stdout`, `stderr` and the `exit code`, the guest
 connects to the `stdout` and `stderr` FIFOs as a reader. The command to be

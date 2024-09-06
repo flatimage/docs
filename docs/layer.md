@@ -55,5 +55,5 @@ The `create` and `add` commands  demonstrated above are similar to the
 create the novel layer from.
 
 <p align="center">
-  <img src="/image/commit.png"/>
+  <img src="https://raw.githubusercontent.com/flatimage/docs/master/docs/image/commit.png"/>
 </p>

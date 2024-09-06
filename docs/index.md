@@ -1,7 +1,6 @@
 <p align="center">
-  <img src="/image/icon.png" width=150px/>
+  <img src="https://raw.githubusercontent.com/flatimage/docs/master/docs/image/icon.png" width=150px/>
 </p>
-
 
 # FlatImage
 

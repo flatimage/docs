@@ -22,5 +22,5 @@
 top of the layer stack of the current image.
 
 <p align="center">
-  <img src="/image/commit.png"/>
+  <img src="https://raw.githubusercontent.com/flatimage/docs/master/docs/image/commit.png"/>
 </p>
