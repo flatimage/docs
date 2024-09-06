@@ -1,0 +1,14 @@
+site_name: FlatImage Documentation
+nav:
+  - Home: index.md
+  - Comparison:
+    - comparison.md
+  - Commands:
+    - fim-root: root.md
+    - fim-exec: exec.md
+    - fim-env: environment.md
+    - fim-desktop: desktop.md
+    - fim-commit: commit.md
+  - Portal:
+    - portal.md
+theme: readthedocs
