@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Transparent Command Portal - FlatImage Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Transparent Command Portal";
+        var mkdocs_page_input_path = "portal.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> FlatImage Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Comparison</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../comparison/">Comparison with other available tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Commands</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../root/">fim-root</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../exec/">fim-exec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../environment/">fim-env</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../desktop/">fim-desktop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../commit/">fim-commit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layer/">fim-layer</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Portal</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Transparent Command Portal</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-it">What is it?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to Use</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it Works</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">FlatImage Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Portal</li>
+      <li class="breadcrumb-item active">Transparent Command Portal</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="transparent-command-portal">Transparent Command Portal</h1>
+<h2 id="what-is-it">What is it?</h2>
+<p>Flatimage has a portal mechanism to execute commands in host machine, the output
+and return code is returned in the guest as if the command was executed in it
+(thus transparent).</p>
+<h2 id="how-to-use">How to Use</h2>
+<p>Examples:</p>
+<ul>
+<li>Check if the host contains the thunar file manager: <code>fim_portal sh -c 'command -v thunar'</code></li>
+<li>Open thunar in the host machine: <code>fim_portal thunar</code></li>
+<li>Open thunar in the host machine (full path): <code>fim_portal /bin/thunar</code></li>
+<li>Open the desktop folder with thunar on the host machine: <code>fim_portal thunar ~/Desktop</code></li>
+</ul>
+<h2 id="how-it-works">How it Works</h2>
+<p><img src="/image/flatimage-portal.png"/></p>
+<p>Three FIFOs are created, for <code>stdout</code>, <code>stderr</code> and the <code>exit code</code>, the guest
+connects to the <code>stdout</code> and <code>stderr</code> FIFOs as a reader. The command to be
+executed in the host machine and the paths to the FIFOs are
+serialized to the host daemon; the daemon creates a child process and replaces
+its <code>stdout</code> and <code>stderr</code> pipes with the provided FIFOs. After the command is
+finished, the exit code is sent through the <code>exit</code> pipe and the guest process
+exits with the same code returned from the child host process.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../layer/" class="btn btn-neutral float-left" title="fim-layer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../layer/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

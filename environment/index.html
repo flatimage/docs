@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>fim-env - FlatImage Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "fim-env";
+        var mkdocs_page_input_path = "environment.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> FlatImage Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Comparison</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../comparison/">Comparison with other available tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Commands</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../root/">fim-root</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../exec/">fim-exec</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">fim-env</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-it">What is it?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to use</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it works</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../desktop/">fim-desktop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../commit/">fim-commit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layer/">fim-layer</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Portal</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../portal/">Transparent Command Portal</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">FlatImage Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Commands</li>
+      <li class="breadcrumb-item active">fim-env</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="environment-variables">Environment Variables</h1>
+<h2 id="what-is-it">What is it?</h2>
+<p>FlatImage provides a number of environment variables to query information about
+directories, version, etc. These are separated in two groups, modifiable and
+read-only:</p>
+<p><strong>Modifiable</strong>:</p>
+<ul>
+<li><code>FIM_DEBUG</code>       : If defined to 1, print debug messages.</li>
+<li><code>FIM_MAIN_OFFSET</code> : Shows filesystem offset and exits.</li>
+</ul>
+<p><strong>Read-Only</strong>:</p>
+<ul>
+<li><code>FIM_VERSION</code>           : The version of the flatimage package</li>
+<li><code>FIM_DIST</code>              : The linux distribution name (alpine, arch)</li>
+<li><code>FIM_FILE_BINARY</code>       : Full path to the flatimage file</li>
+<li><code>FIM_DIR_TEMP</code>          : Location of the runtime directory for instances of the current flatimage</li>
+<li><code>FIM_DIR_MOUNT</code>         : Location of the runtime flatimage mountpoint</li>
+<li><code>FIM_DIR_HOST_CONFIG</code>   : Configuration directory in the host machine</li>
+</ul>
+<h2 id="how-to-use">How to use</h2>
+<p>You can use <code>./app.flatimage fim-help env</code> to get the following usage details:</p>
+<pre><code>Flatimage - Portable Linux Applications
+fim-env:
+   Edit current permissions for the flatimage
+Usage:
+   fim-env add|set &lt;'key=value'&gt;...
+   fim-env del &lt;key&gt;...
+   fim-env list
+Example:
+   fim-env add 'APP_NAME=hello-world' 'PS1=my-app&gt; ' 'HOME=$FIM_DIR_HOST_CONFIG/home'
+</code></pre>
+<p>The <code>env</code> command allows you to set new environment variables as so:</p>
+<pre><code class="language-bash">$ ./app.flatimage fim-env add 'MY_NAME=user' 'MY_STATE=sad'
+</code></pre>
+<p>To use these variables in the default boot command:</p>
+<pre><code class="language-bash">$ ./app.flatimage fim-boot sh -c 'echo &quot;My name is $MY_NAME and I am $MY_STATE&quot;'
+$ ./app.flatimage
+My name is user and I am sad
+</code></pre>
+<p>To list the set variables:</p>
+<pre><code class="language-bash">$ ./app.flatimage fim-env list
+MY_NAME=user
+MY_STATE=sad
+</code></pre>
+<p>To delete the set variables:</p>
+<pre><code class="language-bash">$ ./app.flatimage fim-env del MY_NAME MY_STATE
+</code></pre>
+<p>To enable debugging you can use:</p>
+<pre><code class="language-bash">$ FIM_DEBUG=1 ./app.flatimage
+# or
+$ export FIM_DEBUG=1
+$ ./app.flatimage
+</code></pre>
+<h2 id="how-it-works">How it works</h2>
+<p>FlatImage defines environment variables during its boot process, they are used
+to convey information about the directories to mount filesystems and query data.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../exec/" class="btn btn-neutral float-left" title="fim-exec"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../desktop/" class="btn btn-neutral float-right" title="fim-desktop">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../exec/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../desktop/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

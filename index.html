@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>FlatImage Documentation</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Home";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> FlatImage Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-it">What is it?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to use</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it works</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Comparison</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="comparison/">Comparison with other available tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Commands</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="root/">fim-root</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="exec/">fim-exec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="environment/">fim-env</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="desktop/">fim-desktop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="commit/">fim-commit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="layer/">fim-layer</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Portal</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="portal/">Transparent Command Portal</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">FlatImage Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Home</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p align="center">
+  <img src="/image/icon.png" width=150px/>
+</p>
+
+<h1 id="flatimage">FlatImage</h1>
+<h2 id="what-is-it">What is it?</h2>
+<p>FlatImage, is a hybrid of <a href="https://github.com/flatpak/flatpak">Flatpak</a>
+sandboxing with <a href="https://github.com/AppImage/AppImageKit">AppImage</a> portability.</p>
+<p>FlatImage use case is twofold:</p>
+<ul>
+<li>
+<p>Flatimage is a package format, it includes a piece of software with all its
+    dependencies for it work with across several linux distros (both Musl and
+    GNU). Unlike <code>AppImage</code>, FlatImage runs the application in a container by
+    default, which increases portability and compatibility at the cost of file
+    size.</p>
+</li>
+<li>
+<p>Flatimage is a portable container image that requires no superuser permissions to run.</p>
+</li>
+</ul>
+<p>The diverse <code>GNU/Linux</code> ecosystem includes a vast array of distributions, each
+with its own advantages and use cases. This can lead to cross-distribution
+software compatibility challenges. FlatImage addresses these issues by:</p>
+<ul>
+<li>Utilizing its own root directory, enabling dynamic libraries with hard-coded
+    paths to be packaged alongside the software without
+    <a href="https://github.com/AppImage/AppImageKit/wiki/Bundling-Windows-applications">binary patching</a>.</li>
+<li>Running the application in its own gnu (or musl) environment, therefore, not using host
+    libraries that might be outdated/incompatiblesystem with the application.</li>
+</ul>
+<p>It simplifies the task of software packaging by enforcing the philosophy that it
+should be as simple as setting up a container. This is an effort for the
+end-user to not depend on the application developer to provide the portable
+binary (or to handle how to package the application, dependencies and create a
+runner script). It also increases the quality of life of the package developer,
+simplifying the packaging process of applications.</p>
+<h2 id="how-to-use">How to use</h2>
+<p><strong>Get FlatImage</strong></p>
+<p>You can get the latest release <a href="https://github.com/ruanformigoni/flatimage/releases">here</a>, and extract the compressed archive with your file manager or with <code>tar -xf some-file.tar.xz</code>. To verify the image integrity, you can use the <code>sha256sum</code> file that accompanies each release, like so: <code>sha256sum -c some-file.flatimage.sha256sum</code>.</p>
+<p><strong>Execute The Container</strong></p>
+<p>You can enter the container simply by executing the downloaded image, e.g.,
+<code>./app.flatimage</code>, which should give you a prompt like this <code>(flatimage@arch) →</code>.</p>
+<p>To enter the container as root (to install software) use:</p>
+<pre><code>./app.flatimage fim-root bash
+</code></pre>
+<p><strong>Create a portable firefox installation</strong></p>
+<p>TODO</p>
+<h2 id="how-it-works">How it works</h2>
+<p>A FlatImage contains a container where it executes its own commands apart
+from the host system. With that in mind, it is possible to create applications
+to run in different linux systems (distributions) without worrying about missing
+binaries or libraries.</p>
+<h1 id="motivations">Motivations</h1>
+<ol>
+<li>
+<p>The idea of this application sprung with the challenge to package software
+   and dynamic libraries, such as <code>wine</code>, when there are hard-coded paths. The
+   best solution is invasive
+   <a href="https://github.com/AppImage/AppImageKit/wiki/Bundling-Windows-applications">https://github.com/AppImage/AppImageKit/wiki/Bundling-Windows-applications</a>
+   , which patches the binaries of wine directly to use a custom path for the
+   32-bit libraries (an implementation of this concept is available
+   <a href="https://github.com/ruanformigoni/wine">here</a>), not only that, it requires to
+   patch the <code>32-bit</code> pre-loader <code>ld-linux.so</code> as well, however, sometimes it
+   still fails to execute properly. This is an over exceeding complexity for the
+   end-user, which should package applications with no effort; <code>FlatImage</code>
+   changes the root filesystem the application runs in, to a minimal gnu
+   subsystem, and with that, it solves the previous issues with dynamic
+   libraries no workarounds required. No host libraries are used, which
+   decreases issues of portable applications working on one machine and not in
+   other.</p>
+</li>
+<li>
+<p>The fragmentation of the linux package management is considerable in modern
+   times, e.g., <code>apt</code>, <code>pip</code>, <code>npm</code>, and more. To mitigate this issue
+   <code>FlatImage</code> can perform the installation through the preferred package
+   manager, and turn the program into an executable file, that can run in any
+   linux distribution. E.g.: The user of <code>FlatImage</code> can create a binary of
+   <code>youtube-dl</code>, from the <code>pip</code> package manager, without having either pip or
+   python installed on the host operating system.</p>
+</li>
+<li>
+<p>Some applications are offered as pre-compiled compressed tar files
+   (tarballs), which sometimes only work when installed on the root of the
+   operating system. However, doing so could hinder the operating system
+   integrity, to avoid this issue <code>FlatImage</code> can install tarballs into itself
+   and turn them into a portable binary.</p>
+</li>
+</ol>
+<h1 id="related-projects">Related Projects</h1>
+<ul>
+<li><a href="https://github.com/Kron4ek/Conty">https://github.com/Kron4ek/Conty</a></li>
+<li><a href="https://github.com/genuinetools/binctr">https://github.com/genuinetools/binctr</a></li>
+<li><a href="https://github.com/Intoli/exodus">https://github.com/Intoli/exodus</a></li>
+<li><a href="https://statifier.sourceforge.net/">https://statifier.sourceforge.net/</a></li>
+<li><a href="https://github.com/matthewbauer/nix-bundle">https://github.com/matthewbauer/nix-bundle</a></li>
+<li><a href="https://github.com/containers/bubblewrap">https://github.com/containers/bubblewrap</a></li>
+<li><a href="https://github.com/proot-me/proot">https://github.com/proot-me/proot</a></li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="comparison/" class="btn btn-neutral float-right" title="Comparison with other available tools">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+      <span><a href="comparison/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2024-09-06 21:23:59.908625+00:00
+-->

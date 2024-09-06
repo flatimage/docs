@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Comparison with other available tools - FlatImage Documentation</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Comparison with other available tools";
+        var mkdocs_page_input_path = "comparison.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> FlatImage Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Comparison</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Comparison with other available tools</a>
+    <ul class="current">
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Commands</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../root/">fim-root</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../exec/">fim-exec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../environment/">fim-env</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../desktop/">fim-desktop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../commit/">fim-commit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../layer/">fim-layer</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Portal</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../portal/">Transparent Command Portal</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">FlatImage Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Comparison</li>
+      <li class="breadcrumb-item active">Comparison with other available tools</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="comparison-with-other-available-tools">Comparison with other available tools</h1>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Feature</th>
+<th style="text-align: center;">FlatImage</th>
+<th style="text-align: center;">Docker</th>
+<th style="text-align: center;">AppImage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">No superuser privileges to use</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x<sup>2</sup></td>
+<td style="text-align: center;">x</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Overlayfs</strong> (allows to install programs even after compression)</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">No installation necessary (click and use)</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">Requires docker on the host</td>
+<td style="text-align: center;">x</td>
+</tr>
+<tr>
+<td style="text-align: left;">Requires building on an old system to minimize glibc issues</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">x</td>
+</tr>
+<tr>
+<td style="text-align: left;">Mountable as a filesystem</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x<sup>3</sup></td>
+</tr>
+<tr>
+<td style="text-align: left;">Runs without mounting the filesystem</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+</tr>
+<tr>
+<td style="text-align: left;">Straightforward build process</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Desktop integration</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+</tr>
+<tr>
+<td style="text-align: left;">Extract the contents</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+</tr>
+<tr>
+<td style="text-align: left;">Supports reconfiguration without rebuild</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x (layers)</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">No host libraries used (Filesystem Isolation)</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Supports compression of specific directories/files in the package</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Portable mutable user configuration</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Granular control over containerization</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Works without fuse installed (still requires kernel support)</td>
+<td style="text-align: center;">x<sup>4</sup></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;">x<sup>5</sup></td>
+</tr>
+<tr>
+<td style="text-align: left;">Layered filesystem</td>
+<td style="text-align: center;">x (overlayfs)</td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Advanced networking management</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td style="text-align: left;">Advanced security features</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">x</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<ol>
+<li>Requires superuser privileges</li>
+<li>Only if the user is part of the docker group</li>
+<li>Only as read-only, you can mount FIM as read-write, before compression.</li>
+<li>Works without libfuse/libfuse3, still requires fusermount to be available.</li>
+<li>Experimental implementations, available <a href="https://github.com/probonopd/go-appimage">here</a> and <a href="https://github.com/AppImage/type2-runtime">here</a></li>
+</ol>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../root/" class="btn btn-neutral float-right" title="fim-root">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../root/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
