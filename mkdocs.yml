@@ -3,6 +3,8 @@ nav:
   - Home: index.md
   - Comparison:
     - comparison.md
+  - Examples:
+    - Steam: examples/steam.md
   - Commands:
     - fim-root: cmd/root.md
     - fim-exec: cmd/exec.md
