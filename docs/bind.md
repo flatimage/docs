@@ -28,7 +28,7 @@ Usage: fim-bind list
 
 To bind a device from the host to use in the guest:
 ```
-./app.flatimage fim-bind add dev /dev/my_device /dev/my_device
+$ ./app.flatimage fim-bind add dev /dev/my_device /dev/my_device
 ```
 This will make `my_device` available inside the container.
 
@@ -36,19 +36,59 @@ This will make `my_device` available inside the container.
 
 To bind a file path from the host to the guest as read-only:
 ```
-./app.flatimage fim-bind add ro /home/my-user/Music /Music
+$ ./app.flatimage fim-bind add ro '$HOME/Music' /Music
 ```
 This will make the `Music` directory available inside the container in `/Music`,
-as read-only.
+as read-only. Notice that `'$HOME/Music'` is inside single quotes, this means
+that the `$HOME` variable will only expand when flatimage is executed; i.e.,
+when another user executes the `app`, their `$HOME/Music` directory will be the
+one bound to the container.
 
 ---
 
 To bind a file path from the host to the guest as read-write:
 ```
-./app.flatimage fim-bind add rw /home/my-user/Music /Music
+$ ./app.flatimage fim-bind add rw '$HOME/Music' /Music
 ```
 This will make the `Music` directory available inside the container in `/Music`,
 as read-write.
+
+---
+
+You can list the current bindings with the `list` command:
+
+```
+$ ./blueprint.flatimage fim-bind list
+{
+  "1": {
+    "dst": "/dev/video0",
+    "src": "/dev/video0",
+    "type": "dev"
+  },
+  "2": {
+    "dst": "/Music",
+    "src": "$HOME/Music",
+    "type": "ro"
+  }
+}
+```
+
+---
+
+You can erase a binding with the `del` command, which takes and index as
+argument.
+```
+$ ./blueprint.flatimage fim-bind del 2
+$ ./blueprint.flatimage fim-bind list
+{
+  "1": {
+    "dst": "/dev/video0",
+    "src": "/dev/video0",
+    "type": "dev"
+  }
+}
+```
+
 
 ## How it works
 
