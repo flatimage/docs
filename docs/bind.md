@@ -58,7 +58,7 @@ as read-write.
 You can list the current bindings with the `list` command:
 
 ```
-$ ./blueprint.flatimage fim-bind list
+$ ./app.flatimage fim-bind list
 {
   "1": {
     "dst": "/dev/video0",
@@ -78,8 +78,8 @@ $ ./blueprint.flatimage fim-bind list
 You can erase a binding with the `del` command, which takes and index as
 argument.
 ```
-$ ./blueprint.flatimage fim-bind del 2
-$ ./blueprint.flatimage fim-bind list
+$ ./app.flatimage fim-bind del 2
+$ ./app.flatimage fim-bind list
 {
   "1": {
     "dst": "/dev/video0",
