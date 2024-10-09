@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Steam - FlatImage Documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Steam";
+        var mkdocs_page_input_path = "examples/steam.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> FlatImage Documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Comparison</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../comparison/">Comparison with other available tools</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Examples</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Steam</a>
+    <ul class="current">
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Commands</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/root/">fim-root</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/exec/">fim-exec</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/environment/">fim-env</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/desktop/">fim-desktop</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/commit/">fim-commit</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/layer/">fim-layer</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/bind/">fim-bind</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Portal</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../portal/">Transparent Command Portal</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">FlatImage Documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Examples</li>
+      <li class="breadcrumb-item active">Steam</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="create-a-portable-steam-installation">Create a Portable Steam Installation</h1>
+<p>Here is the process to create a portable installation of steam, that can be
+stored in an external hard-drive to use across different computers without
+hassle.</p>
+<pre><code class="language-bash">#!/bin/bash
+
+set -e
+
+function _die()
+{
+  echo &quot;$*&quot; &gt;&amp;2
+  kill -s TERM &quot;$$&quot;
+}
+
+function _requires()
+{
+  for i; do
+    command -v &quot;$i&quot; &amp;&gt;/dev/null || _die &quot;Dependency '$i' not found, please install it separately&quot;
+  done
+}
+
+function _main()
+{
+  _requires &quot;tar&quot; &quot;wget&quot; &quot;xz&quot;
+
+  mkdir -p build &amp;&amp; cd build
+
+  # Use jq to fetch latest flatimage version from github
+  mkdir -p bin
+  export PATH=&quot;$(pwd)/bin:$PATH&quot;
+  wget -q --show-progress --progress=dot:binary -O bin/jq https://github.com/jqlang/jq/releases/download/jq-1.7/jq-linux-amd64
+  chmod +x ./bin/*
+
+  # TODO
+
+  # Enable network
+  &quot;$image&quot; fim-perms set network
+
+  # Update image
+  &quot;$image&quot; fim-root pacman -Syu --noconfirm
+
+  # Install dependencies
+  ## General
+  &quot;$image&quot; fim-root pacman -S --noconfirm xorg-server mesa lib32-mesa glxinfo lib32-gcc-libs \
+    gcc-libs pcre freetype2 lib32-freetype2
+  ## Video AMD/Intel
+  &quot;$image&quot; fim-root pacman -S --noconfirm xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon vulkan-tools
+  &quot;$image&quot; fim-root pacman -S --noconfirm xf86-video-intel vulkan-intel lib32-vulkan-intel vulkan-tools
+
+  # Install steam
+  ## Select the appropriated drivers for your GPU when asked
+  &quot;$image&quot; fim-root pacman -S --noconfirm steam
+
+  # Clear cache
+  &quot;$image&quot; fim-root fakechroot pacman -Scc --noconfirm
+
+  # Set permissions
+  &quot;$image&quot; fim-perms set media,audio,wayland,xorg,udev,dbus_user,usb,input,gpu,network
+
+  # Configure user name and home directory
+  &quot;$image&quot; fim-exec mkdir -p /home/steam
+  &quot;$image&quot; fim-env set 'PATH=&quot;/usr/bin:$PATH&quot;' \
+    'USER=steam' \
+    'HOME=/home/steam' \
+    'XDG_CONFIG_HOME=/home/steam/.config' \
+    'XDG_DATA_HOME=/home/steam/.local/share'
+
+  # Set command to run by default
+  &quot;$image&quot; fim-boot /usr/bin/steam
+
+  # Compress
+  &quot;$image&quot; fim-commit
+
+  # Copy
+  cp &quot;$image&quot; ../steam
+}
+
+_main &quot;$@&quot;
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../comparison/" class="btn btn-neutral float-left" title="Comparison with other available tools"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../cmd/root/" class="btn btn-neutral float-right" title="fim-root">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../comparison/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../../cmd/root/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
