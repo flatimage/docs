@@ -4,13 +4,13 @@ nav:
   - Comparison:
     - comparison.md
   - Commands:
-    - fim-root: root.md
-    - fim-exec: exec.md
-    - fim-env: environment.md
-    - fim-desktop: desktop.md
-    - fim-commit: commit.md
-    - fim-layer: layer.md
-    - fim-bind: bind.md
+    - fim-root: cmd/root.md
+    - fim-exec: cmd/exec.md
+    - fim-env: cmd/environment.md
+    - fim-desktop: cmd/desktop.md
+    - fim-commit: cmd/commit.md
+    - fim-layer: cmd/layer.md
+    - fim-bind: cmd/bind.md
   - Portal:
     - portal.md
 theme: readthedocs
