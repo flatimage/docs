@@ -1,6 +1,6 @@
 site_name: FlatImage Documentation
 nav:
-  - Home: index.md
+  - FlatImage: index.md
   - Comparison:
     - comparison.md
   - Examples:

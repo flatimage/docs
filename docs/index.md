@@ -40,28 +40,18 @@ simplifying the packaging process of applications.
 
 **Get FlatImage**
 
-You can get the latest release [here](https://github.com/ruanformigoni/flatimage/releases), and extract the compressed archive with your file manager or with `tar -xf some-file.tar.xz`. To verify the image integrity, you can use the `sha256sum` file that accompanies each release, like so: `sha256sum -c some-file.flatimage.sha256sum`.
+TODO
 
 **Execute The Container**
-
-You can enter the container simply by executing the downloaded image, e.g.,
-`./app.flatimage`, which should give you a prompt like this `(flatimage@arch) →`.
-
-To enter the container as root (to install software) use:
-```
-./app.flatimage fim-root bash
-```
-
-**Create a portable firefox installation**
 
 TODO
 
 ## How it works
 
-A FlatImage contains a container where it executes its own commands apart
-from the host system. With that in mind, it is possible to create applications
-to run in different linux systems (distributions) without worrying about missing
-binaries or libraries.
+A FlatImage uses a container where it executes its own commands apart from the
+host system. With that in mind, it is possible to package applications that run
+in different linux distributions without worrying about missing binaries or
+libraries.
 
 
 # Motivations
