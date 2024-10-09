@@ -10,6 +10,7 @@ nav:
     - fim-desktop: desktop.md
     - fim-commit: commit.md
     - fim-layer: layer.md
+    - fim-bind: bind.md
   - Portal:
     - portal.md
 theme: readthedocs
