@@ -40,11 +40,37 @@ simplifying the packaging process of applications.
 
 **Get FlatImage**
 
-TODO
+Download a flatimage package from the [releases](https://github.com/ruanformigoni/flatimage/releases), your available options are:
+
+* `arch.flatimage`
+* `alpine.flatimage`
+* `blueprint.flatimage`
+
+`arch` is a complete `GNU` archlinux subsystem with the `pacman` package manager.
+
+`alpine` is a complete `MUSL` alpine subsystem with the `apk` package manager.
+
+`blueprint` is a flatimage without a system to build a package with only the
+bare minimum for the application to work, making it lightweight in file size.
 
 **Execute The Container**
 
-TODO
+With `arch.flatimage` as an example, you can enter the container simply by
+executing the binary file:
+
+```
+$ chmod +x ./arch.flatimage
+$ ./arch.flatimage
+[flatimage-arch] / → 
+```
+
+To exit the container, just press `CTRL+D`. To download packages please enable
+the network permission with:
+```
+$ ./arch.flatimage fim-perms add network
+```
+
+Go to the permissions help page for more details.
 
 ## How it works
 
