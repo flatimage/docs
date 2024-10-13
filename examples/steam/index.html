@@ -111,88 +111,12 @@ hassle.</p>
 chmod +x steam.sh
 ./steam.sh
 </code></pre>
-<p>This will generate a <code>steam.flatimage</code> package, which will store all the information in the
-<code>.steam.flatimage.config</code> hidden folder. You can move this binary to an external
-hard-drive and use the same steam installation on different linux distributions
-without worrying about dependency/installation issues. Furthermore, all your games will be
-installed to <code>.steam.flatimage.config</code>.</p>
-<hr />
-<p>Here is the details of the executed script:</p>
-<pre><code class="language-bash">#!/bin/bash
-
-set -e
-
-function _die()
-{
-  echo &quot;$*&quot; &gt;&amp;2
-  kill -s TERM &quot;$$&quot;
-}
-
-function _requires()
-{
-  for i; do
-    command -v &quot;$i&quot; &amp;&gt;/dev/null || _die &quot;Dependency '$i' not found, please install it separately&quot;
-  done
-}
-
-function _main()
-{
-  _requires &quot;tar&quot; &quot;wget&quot; &quot;xz&quot;
-
-  mkdir -p build &amp;&amp; cd build
-
-  # Use jq to fetch latest flatimage version from github
-  mkdir -p bin
-  export PATH=&quot;$(pwd)/bin:$PATH&quot;
-  wget -q --show-progress --progress=dot:binary -O bin/jq https://github.com/jqlang/jq/releases/download/jq-1.7/jq-linux-amd64
-  chmod +x ./bin/*
-
-  # TODO
-
-  # Enable network
-  &quot;$image&quot; fim-perms set network
-
-  # Update image
-  &quot;$image&quot; fim-root pacman -Syu --noconfirm
-
-  # Install dependencies
-  ## General
-  &quot;$image&quot; fim-root pacman -S --noconfirm xorg-server mesa lib32-mesa glxinfo lib32-gcc-libs \
-    gcc-libs pcre freetype2 lib32-freetype2
-  ## Video AMD/Intel
-  &quot;$image&quot; fim-root pacman -S --noconfirm xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon vulkan-tools
-  &quot;$image&quot; fim-root pacman -S --noconfirm xf86-video-intel vulkan-intel lib32-vulkan-intel vulkan-tools
-
-  # Install steam
-  ## Select the appropriated drivers for your GPU when asked
-  &quot;$image&quot; fim-root pacman -S --noconfirm steam
-
-  # Clear cache
-  &quot;$image&quot; fim-root fakechroot pacman -Scc --noconfirm
-
-  # Set permissions
-  &quot;$image&quot; fim-perms set media,audio,wayland,xorg,udev,dbus_user,usb,input,gpu,network
-
-  # Configure user name and home directory
-  &quot;$image&quot; fim-exec mkdir -p /home/steam
-  &quot;$image&quot; fim-env set 'PATH=&quot;/usr/bin:$PATH&quot;' \
-    'USER=steam' \
-    'HOME=/home/steam' \
-    'XDG_CONFIG_HOME=/home/steam/.config' \
-    'XDG_DATA_HOME=/home/steam/.local/share'
-
-  # Set command to run by default
-  &quot;$image&quot; fim-boot /usr/bin/steam
-
-  # Compress
-  &quot;$image&quot; fim-commit
-
-  # Copy
-  cp &quot;$image&quot; ../steam
-}
-
-_main &quot;$@&quot;
-</code></pre>
+<p>This generates a <code>steam.flatimage</code> package, which will store all the information in the
+<code>.steam.flatimage.config</code> hidden folder (installed games, save data, ~/.config,
+~/.local, etc). You can move this binary to an external hard-drive and use the
+same steam installation on different linux distributions without worrying about
+dependency/installation issues, nothing is installed on the host, so your system
+remains clean.</p>
               
             </div>
           </div><footer>
