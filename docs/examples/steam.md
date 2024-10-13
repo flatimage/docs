@@ -4,6 +4,20 @@ Here is the process to create a portable installation of steam, that can be
 stored in an external hard-drive to use across different computers without
 hassle.
 
+```
+wget -Osteam.sh https://raw.githubusercontent.com/ruanformigoni/flatimage/refs/heads/master/examples/steam.sh
+chmod +x steam.sh
+./steam.sh
+```
+
+This will generate a `steam.flatimage` package, which will store all the information in the
+`.steam.flatimage.config` hidden folder. You can move this binary to an external
+hard-drive and use the same steam installation of different linux machines
+without worrying about dependency/installation issues.
+
+---
+Here is the details of the executed script:
+
 ```bash
 #!/bin/bash
 
