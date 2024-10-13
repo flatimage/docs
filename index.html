@@ -12,7 +12,7 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Home";
+        var mkdocs_page_name = "FlatImage";
         var mkdocs_page_input_path = "index.md";
         var mkdocs_page_url = null;
       </script>
@@ -40,7 +40,7 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">FlatImage</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#what-is-it">What is it?</a>
     </li>
@@ -97,7 +97,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Home</li>
+      <li class="breadcrumb-item active">FlatImage</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -145,20 +145,33 @@ runner script). It also increases the quality of life of the package developer,
 simplifying the packaging process of applications.</p>
 <h2 id="how-to-use">How to use</h2>
 <p><strong>Get FlatImage</strong></p>
-<p>You can get the latest release <a href="https://github.com/ruanformigoni/flatimage/releases">here</a>, and extract the compressed archive with your file manager or with <code>tar -xf some-file.tar.xz</code>. To verify the image integrity, you can use the <code>sha256sum</code> file that accompanies each release, like so: <code>sha256sum -c some-file.flatimage.sha256sum</code>.</p>
+<p>Download a flatimage package from the <a href="https://github.com/ruanformigoni/flatimage/releases">releases</a>, your available options are:</p>
+<ul>
+<li><code>arch.flatimage</code></li>
+<li><code>alpine.flatimage</code></li>
+<li><code>blueprint.flatimage</code></li>
+</ul>
+<p><code>arch</code> is a complete <code>GNU</code> archlinux subsystem with the <code>pacman</code> package manager.</p>
+<p><code>alpine</code> is a complete <code>MUSL</code> alpine subsystem with the <code>apk</code> package manager.</p>
+<p><code>blueprint</code> is a flatimage without a system to build a package with only the
+bare minimum for the application to work, making it lightweight in file size.</p>
 <p><strong>Execute The Container</strong></p>
-<p>You can enter the container simply by executing the downloaded image, e.g.,
-<code>./app.flatimage</code>, which should give you a prompt like this <code>(flatimage@arch) →</code>.</p>
-<p>To enter the container as root (to install software) use:</p>
-<pre><code>./app.flatimage fim-root bash
+<p>With <code>arch.flatimage</code> as an example, you can enter the container simply by
+executing the binary file:</p>
+<pre><code>$ chmod +x ./arch.flatimage
+$ ./arch.flatimage
+[flatimage-arch] / → 
 </code></pre>
-<p><strong>Create a portable firefox installation</strong></p>
-<p>TODO</p>
+<p>To exit the container, just press <code>CTRL+D</code>. To download packages please enable
+the network permission with:</p>
+<pre><code>$ ./arch.flatimage fim-perms add network
+</code></pre>
+<p>Go to the permissions help page for more details.</p>
 <h2 id="how-it-works">How it works</h2>
-<p>A FlatImage contains a container where it executes its own commands apart
-from the host system. With that in mind, it is possible to create applications
-to run in different linux systems (distributions) without worrying about missing
-binaries or libraries.</p>
+<p>A FlatImage uses a container where it executes its own commands apart from the
+host system. With that in mind, it is possible to package applications that run
+in different linux distributions without worrying about missing binaries or
+libraries.</p>
 <h1 id="motivations">Motivations</h1>
 <ol>
 <li>
@@ -253,5 +266,5 @@ binaries or libraries.</p>
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2024-10-09 18:01:08.432400+00:00
+Build Date UTC : 2024-10-13 00:54:19.077711+00:00
 -->
