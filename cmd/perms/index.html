@@ -144,6 +144,10 @@ Example: fim-perms add home,network,gpu
 </code></pre>
 <p>This will list all the <strong>currently set</strong> permissions.</p>
 <hr />
+<p>To delete a specific permission, use <code>del</code>:</p>
+<pre><code>$ ./app.flatimage fim-perms del home
+</code></pre>
+<p>This remove access to the host home directory.</p>
 <h2 id="how-it-works">How it works</h2>
 <p>FlatImage uses <a href="https://github.com/containers/bubblewrap">bubblewrap's</a>
 bind mechanisms to make devices and directories available in the guest
