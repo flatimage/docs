@@ -13,6 +13,7 @@ nav:
     - fim-commit: cmd/commit.md
     - fim-layer: cmd/layer.md
     - fim-bind: cmd/bind.md
+    - fim-perms: cmd/perms.md
   - Portal:
     - portal.md
 theme: readthedocs

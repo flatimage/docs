@@ -70,7 +70,7 @@ the network permission with:
 $ ./arch.flatimage fim-perms add network
 ```
 
-Go to the permissions help page for more details.
+Go to the `fim-perms` help page for more details.
 
 ## How it works
 
