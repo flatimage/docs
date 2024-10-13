@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>fim-layer - FlatImage Documentation</title>
+    <title>fim-perms - FlatImage Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "fim-layer";
-        var mkdocs_page_input_path = "cmd/layer.md";
+        var mkdocs_page_name = "fim-perms";
+        var mkdocs_page_input_path = "cmd/perms.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -65,19 +65,19 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../commit/">fim-commit</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">fim-layer</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-is-it">What is it?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to Use</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it Works</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../layer/">fim-layer</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../bind/">fim-bind</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../perms/">fim-perms</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">fim-perms</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-it">What is it?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to use</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it works</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Portal</span></p>
@@ -100,7 +100,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Commands</li>
-      <li class="breadcrumb-item active">fim-layer</li>
+      <li class="breadcrumb-item active">fim-perms</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -109,49 +109,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="manager-flatimage-layers">Manager FlatImage layers</h1>
+                <h1 id="configure-permissions">Configure permissions</h1>
 <h2 id="what-is-it">What is it?</h2>
-<p><code>fim-layer</code> is a command to manage the layers of a FlatImage.</p>
-<h2 id="how-to-use">How to Use</h2>
-<p>In this example, lets create a new layer that includes an executable to print
-<code>hello world</code> on the terminal. The first step is to create the directory
-structure for the layer, e.g.:</p>
-<pre><code class="language-bash">$ mkdir -p ./root/usr/bin
+<p>It is a functionally to allow granular access to the host's resources.</p>
+<h2 id="how-to-use">How to use</h2>
+<p>You can use <code>./app.flatimage fim-help perms</code> to get the following usage details:</p>
+<pre><code class="language-txt">fim-perms : Edit current permissions for the flatimage
+Commands:
+   add,del,list,
+   add : Allow one or more permissions
+   del : Delete one or more permissions
+   list : List current permissions
+Note: Permissions: home,media,audio,wayland,xorg,dbus_user,dbus_system,udev,usb,input,gpu,network
+Usage: fim-perms add &lt;perms...&gt;
+   &lt;perms&gt; : One or more permissions
+Usage: fim-perms del &lt;perms...&gt;
+   &lt;perms&gt; : One or more permissions
+Usage: fim-perms list
+Example: fim-perms add home,network,gpu
 </code></pre>
-<p>The root directory will overlay the root directory of the FlatImage, now lets
-create our script and make it executable:</p>
-<pre><code class="language-bash"># Use bash to run the script
-$ echo '#!/bin/bash' &gt; ./root/usr/bin/hello-world.sh
-# Print hello world with the script
-$ echo 'echo &quot;hello world&quot;' &gt;&gt; ./root/usr/bin/hello-world.sh
-# Make the script executable
-$ chmod +x ./root/usr/bin/hello-world.sh
+<hr />
+<p>To allow the access to a resource, use the <code>add</code> subcommand:</p>
+<pre><code>$ ./app.flatimage fim-perms add home
 </code></pre>
-<p>Now with the root directory configured, we can create the novel layer with:</p>
-<pre><code class="language-bash"># This command creates a layer from the 'root' folder and saves
-# it to a file names 'layer'
-$ ./app.flatimage fim-layer create ./root ./layer
+<p>This will make the <code>home</code> directory of the host accessible from the container.</p>
+<hr />
+<p>To reset all permissions to a specific list of permissions, use <code>set</code>:</p>
+<pre><code>$ ./app.flatimage fim-perms set media,audio,wayland,xorg,dbus_user,dbus_system,udev,usb,input,gpu,network
 </code></pre>
-<p>The last step is to include the created layer in the FlatImage:</p>
-<pre><code class="language-bash">$ ./app.flatimage fim-layer add ./layer
+<p>This will allow access to the majority of resources, except <code>home</code>.</p>
+<hr />
+<p>To list the current permissions, use <code>list</code>:</p>
+<pre><code>$ ./app.flatimage fim-perms list
 </code></pre>
-<p>Now we can test if the process succeeded with:</p>
-<pre><code class="language-bash">$ ./app.flatimage fim-exec hello-world.sh
-hello world
-</code></pre>
-<h2 id="how-it-works">How it Works</h2>
-<p>The <code>create</code> and <code>add</code> commands  demonstrated above are similar to the
-<code>fim-commit</code> command, but allow the user to specify a specific directory to
-create the novel layer from.</p>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/flatimage/docs/master/docs/image/commit.png"/>
-</p>
+<p>This will list all the <strong>currently set</strong> permissions.</p>
+<hr />
+<h2 id="how-it-works">How it works</h2>
+<p>FlatImage uses <a href="https://github.com/containers/bubblewrap">bubblewrap's</a>
+bind mechanisms to make devices and directories available in the guest
+container.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../commit/" class="btn btn-neutral float-left" title="fim-commit"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../bind/" class="btn btn-neutral float-right" title="fim-bind">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../bind/" class="btn btn-neutral float-left" title="fim-bind"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../portal/" class="btn btn-neutral float-right" title="Transparent Command Portal">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -174,10 +176,10 @@ create the novel layer from.</p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../commit/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../bind/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../bind/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../portal/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
