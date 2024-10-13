@@ -56,6 +56,14 @@ This will list all the **currently set** permissions.
 
 ---
 
+To delete a specific permission, use `del`:
+
+```
+$ ./app.flatimage fim-perms del home
+```
+
+This remove access to the host home directory.
+
 ## How it works
 
 FlatImage uses [bubblewrap's](https://github.com/containers/bubblewrap)
