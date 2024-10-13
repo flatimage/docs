@@ -12,8 +12,9 @@ chmod +x steam.sh
 
 This will generate a `steam.flatimage` package, which will store all the information in the
 `.steam.flatimage.config` hidden folder. You can move this binary to an external
-hard-drive and use the same steam installation of different linux machines
-without worrying about dependency/installation issues.
+hard-drive and use the same steam installation on different linux distributions
+without worrying about dependency/installation issues. Furthermore, all your games will be
+installed to `.steam.flatimage.config`.
 
 ---
 Here is the details of the executed script:
