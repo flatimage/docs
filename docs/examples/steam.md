@@ -5,7 +5,7 @@ stored in an external hard-drive to use across different computers without
 hassle.
 
 ```
-wget -Osteam.sh https://raw.githubusercontent.com/ruanformigoni/flatimage/refs/heads/master/examples/steam.sh
+wget -O steam.sh https://raw.githubusercontent.com/ruanformigoni/flatimage/refs/heads/master/examples/steam.sh
 chmod +x steam.sh
 ./steam.sh
 ```
