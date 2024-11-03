@@ -16,3 +16,5 @@ This generates a `steam.flatimage` package, which will store all the information
 same steam installation on different linux distributions without worrying about
 dependency/installation issues, nothing is installed on the host, so your system
 remains clean.
+
+Read the full script to create the steam package [here](https://github.com/ruanformigoni/flatimage/blob/master/examples/steam.sh).

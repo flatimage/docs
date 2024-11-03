@@ -5,6 +5,7 @@ nav:
     - comparison.md
   - Examples:
     - Steam: examples/steam.md
+    - Firefox: examples/firefox.md
   - Commands:
     - fim-root: cmd/root.md
     - fim-exec: cmd/exec.md
@@ -16,4 +17,10 @@ nav:
     - fim-perms: cmd/perms.md
   - Portal:
     - portal.md
+  - Configuration:
+    - Prompt: configuration/prompt.md
+    - Compression: configuration/compression.md
+    - Binding: configuration/binding.md
+  - Architecture:
+    - Directories: architecture/directories.md
 theme: readthedocs
