@@ -45,7 +45,7 @@ variable.
     * Binds `[ro]` `/etc/resolv.conf -> /etc/resolv.conf`
 
 If `XDG_RUNTIME_DIR` is undefined it defaults to `/run/user/$(id -u)`. The tag
-after binds indicates if the bind if `read-only [ro]`, `read-write [rw]` or a
+after `Binds` indicates if the bind is `read-only [ro]`, `read-write [rw]` or a
 `device [dev]`.
 
 ## How to use
