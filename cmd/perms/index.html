@@ -133,65 +133,67 @@ available permissions and their descriptions are as follows:</p>
 <li>home - Access to the host <code>HOME</code> directory, defined by the <code>HOME</code> environment
 variable.</li>
 <li>media - Access to external storage devices.<ul>
-<li>Binds <code>/media -&gt; /media</code></li>
-<li>Binds <code>/run/media -&gt; /run/media</code></li>
-<li>Binds <code>/mnt -&gt; /mnt</code></li>
+<li>Binds <code>[rw]</code> <code>/media -&gt; /media</code></li>
+<li>Binds <code>[rw]</code> <code>/run/media -&gt; /run/media</code></li>
+<li>Binds <code>[rw]</code> <code>/mnt -&gt; /mnt</code></li>
 </ul>
 </li>
 <li>audio - Access to audio sockets.<ul>
-<li>Binds <code>$XDG_RUNTIME_DIR/pulse/native -&gt; $XDG_RUNTIME_DIR/pulse/native</code></li>
-<li>Binds <code>$XDG_RUNTIME_DIR/pipewire-0 -&gt; $XDG_RUNTIME_DIR/pipewire-0</code>.</li>
+<li>Binds <code>[rw]</code> <code>$XDG_RUNTIME_DIR/pulse/native -&gt; $XDG_RUNTIME_DIR/pulse/native</code></li>
+<li>Binds <code>[rw]</code> <code>$XDG_RUNTIME_DIR/pipewire-0 -&gt; $XDG_RUNTIME_DIR/pipewire-0</code>.</li>
 </ul>
 </li>
 <li>wayland - Access to the wayland socket.<ul>
-<li>Binds <code>$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY -&gt; $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY</code></li>
+<li>Binds <code>[rw]</code> <code>$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY -&gt; $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY</code></li>
 <li>Requires defined variable <code>WAYLAND_DISPLAY</code> on the host.</li>
 </ul>
 </li>
 <li>xorg - Access to the <code>xorg</code> socket.<ul>
-<li>Binds <code>$XAUTHORITY -&gt; $XAUTHORITY</code>.</li>
+<li>Binds <code>[ro]</code> <code>$XAUTHORITY -&gt; $XAUTHORITY</code>.</li>
 <li>Requires defined variables <code>XAUTHORITY</code> and <code>DISPLAY</code> on the host.</li>
 </ul>
 </li>
 <li>dbus_user - Allows access to the <code>session bus</code>, allowing desktop applications to
     interact with each other.<ul>
-<li>Binds <code>$DBUS_SESSION_BUS_ADDRESS -&gt; $DBUS_SESSION_BUS_ADDRESS</code>.</li>
+<li>Binds <code>[rw]</code> <code>$DBUS_SESSION_BUS_ADDRESS -&gt; $DBUS_SESSION_BUS_ADDRESS</code>.</li>
 <li>Requires defined variable <code>DBUS_SESSION_BUS_ADDRESS</code>.</li>
 <li>Firefox uses <code>dbus_user</code> to communicate with other instances (not a hard-requirement).</li>
 </ul>
 </li>
 <li>dbus_system - System level messages<ul>
-<li>Binds <code>/run/dbus/system_bus_socket -&gt; /run/dbus/system_bus_socket</code>.</li>
+<li>Binds <code>[rw]</code> <code>/run/dbus/system_bus_socket -&gt; /run/dbus/system_bus_socket</code>.</li>
 </ul>
 </li>
 <li>udev - Monitor device events, detect new hardware / hardware changes.<ul>
-<li>Binds <code>/run/udev -&gt; /run/udev</code>.</li>
+<li>Binds <code>[rw]</code> <code>/run/udev -&gt; /run/udev</code>.</li>
 </ul>
 </li>
 <li>usb - Provides access to Universal Serial Bus <code>USB</code> devices.<ul>
-<li>Binds <code>/dev/usb -&gt; /dev/usb</code></li>
-<li>Binds <code>/dev/bus/usb -&gt; /dev/bus/usb</code></li>
+<li>Binds <code>[rw]</code> <code>/dev/usb -&gt; /dev/usb</code></li>
+<li>Binds <code>[rw]</code> <code>/dev/bus/usb -&gt; /dev/bus/usb</code></li>
 </ul>
 </li>
 <li>input - Binds input devices (joysticks, mouse, keyboard, etc)<ul>
-<li>Binds <code>/dev/input -&gt; /dev/input</code></li>
-<li>Binds <code>/dev/uinput -&gt; /dev/uinput</code></li>
+<li>Binds <code>[rw]</code> <code>/dev/input -&gt; /dev/input</code></li>
+<li>Binds <code>[dev]</code> <code>/dev/uinput -&gt; /dev/uinput</code></li>
 </ul>
 </li>
 <li>gpu - Allows access to GPU hardware<ul>
-<li>Binds <code>/dev/dri -&gt; /dev/dri</code></li>
+<li>Binds <code>[rw]</code> <code>/dev/dri -&gt; /dev/dri</code></li>
 <li>Symlinks nvidia drivers from the host to the container</li>
 </ul>
 </li>
 <li>network - Configures network access<ul>
-<li>Binds <code>/etc/host.conf -&gt; /etc/host.conf</code></li>
-<li>Binds <code>/etc/hosts -&gt; /etc/hosts</code></li>
-<li>Binds <code>/etc/nsswitch.conf -&gt; /etc/nsswitch.conf</code></li>
-<li>Binds <code>/etc/resolv.conf -&gt; /etc/resolv.conf</code></li>
+<li>Binds <code>[ro]</code> <code>/etc/host.conf -&gt; /etc/host.conf</code></li>
+<li>Binds <code>[ro]</code> <code>/etc/hosts -&gt; /etc/hosts</code></li>
+<li>Binds <code>[ro]</code> <code>/etc/nsswitch.conf -&gt; /etc/nsswitch.conf</code></li>
+<li>Binds <code>[ro]</code> <code>/etc/resolv.conf -&gt; /etc/resolv.conf</code></li>
 </ul>
 </li>
 </ul>
-<p>If <code>XDG_RUNTIME_DIR</code> is undefined it defaults to <code>/run/user/$(id -u)</code>.</p>
+<p>If <code>XDG_RUNTIME_DIR</code> is undefined it defaults to <code>/run/user/$(id -u)</code>. The tag
+after binds indicates if the bind if <code>read-only [ro]</code>, <code>read-write [rw]</code> or a
+<code>device [dev]</code>.</p>
 <h2 id="how-to-use">How to use</h2>
 <p>You can use <code>./app.flatimage fim-help perms</code> to get the following usage details:</p>
 <pre><code class="language-txt">fim-perms : Edit current permissions for the flatimage
