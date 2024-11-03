@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Steam - FlatImage Documentation</title>
+    <title>Prompt - FlatImage Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Steam";
-        var mkdocs_page_input_path = "examples/steam.md";
+        var mkdocs_page_name = "Prompt";
+        var mkdocs_page_input_path = "configuration/prompt.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -49,12 +49,10 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Examples</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Steam</a>
-    <ul class="current">
-    </ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/steam/">Steam</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../firefox/">Firefox</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../examples/firefox/">Firefox</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Commands</span></p>
@@ -82,12 +80,18 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Configuration</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/prompt/">Prompt</a>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Prompt</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#setting-a-custom-prompt">Setting a Custom Prompt</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#appendix">Appendix</a>
+    </li>
+    </ul>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/compression/">Compression</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../compression/">Compression</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/binding/">Binding</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../binding/">Binding</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Architecture</span></p>
@@ -109,8 +113,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Examples</li>
-      <li class="breadcrumb-item active">Steam</li>
+          <li class="breadcrumb-item">Configuration</li>
+      <li class="breadcrumb-item active">Prompt</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -119,27 +123,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="create-a-portable-steam-installation">Create a Portable Steam Installation</h1>
-<p>Here is the process to create a portable installation of steam, that can be
-stored in an external hard-drive to use across different computers without
-hassle.</p>
-<pre><code>wget -O steam.sh https://raw.githubusercontent.com/ruanformigoni/flatimage/refs/heads/master/examples/steam.sh
-chmod +x steam.sh
-./steam.sh
+                <h1 id="prompt">Prompt</h1>
+<h2 id="setting-a-custom-prompt">Setting a Custom Prompt</h2>
+<p>You can change the value of the PS1 variable for a custom prompt for your
+application, the <code>Appendix</code> contains the options reference.</p>
+<pre><code class="language-bash">$ ./app.flatimage fim-env set 'PS1=&quot;[\#] \A \W -&gt; &quot;'
+$ ./app.flatimage fim-exec bash
+[1] 15:05 ~ -&gt;
 </code></pre>
-<p>This generates a <code>steam.flatimage</code> package, which will store all the information in the
-<code>.steam.flatimage.config</code> hidden folder (installed games, save data, ~/.config,
-~/.local, etc). You can move this binary to an external hard-drive and use the
-same steam installation on different linux distributions without worrying about
-dependency/installation issues, nothing is installed on the host, so your system
-remains clean.</p>
-<p>Read the full script to create the steam package <a href="https://github.com/ruanformigoni/flatimage/blob/master/examples/steam.sh">here</a>.</p>
+<h2 id="appendix">Appendix</h2>
+<p>Details for <code>PS1</code> configuration:</p>
+<pre><code class="language-txt">PROMPTING
+       When  executing interactively, bash displays the primary prompt PS1 when it is ready to read a command, and the secondary prompt PS2 when it needs more
+       input to complete a command.  Bash displays PS0 after it reads a command but before executing it.  Bash displays PS4 as described above before  tracing
+       each command when the -x option is enabled.  Bash allows these prompt strings to be customized by inserting a number of backslash-escaped special char‐
+       acters that are decoded as follows:
+              \a     an ASCII bell character (07)
+              \d     the date in &quot;Weekday Month Date&quot; format (e.g., &quot;Tue May 26&quot;)
+              \D{format}
+                     the  format is passed to strftime(3) and the result is inserted into the prompt string; an empty format results in a locale-specific time
+                     representation.  The braces are required
+              \e     an ASCII escape character (033)
+              \h     the hostname up to the first ‘.'
+              \H     the hostname
+              \j     the number of jobs currently managed by the shell
+              \l     the basename of the shell's terminal device name
+              \n     newline
+              \r     carriage return
+              \s     the name of the shell, the basename of $0 (the portion following the final slash)
+              \t     the current time in 24-hour HH:MM:SS format
+              \T     the current time in 12-hour HH:MM:SS format
+              \@     the current time in 12-hour am/pm format
+              \A     the current time in 24-hour HH:MM format
+              \u     the username of the current user
+              \v     the version of bash (e.g., 2.00)
+              \V     the release of bash, version + patch level (e.g., 2.00.0)
+              \w     the value of the PWD shell variable ($PWD), with $HOME abbreviated with a tilde (uses the value of the PROMPT_DIRTRIM variable)
+              \W     the basename of $PWD, with $HOME abbreviated with a tilde
+              \!     the history number of this command
+              \#     the command number of this command
+              \$     if the effective UID is 0, a #, otherwise a $
+              \nnn   the character corresponding to the octal number nnn
+              \\     a backslash
+              \[     begin a sequence of non-printing characters, which could be used to embed a terminal control sequence into the prompt
+              \]     end a sequence of non-printing characters
+
+       The command number and the history number are usually different: the history number of a command is its position in the history list, which may include
+       commands restored from the history file (see HISTORY below), while the command number is the position in the sequence of commands executed  during  the
+       current  shell session.  After the string is decoded, it is expanded via parameter expansion, command substitution, arithmetic expansion, and quote re‐
+       moval, subject to the value of the promptvars shell option (see the description of the shopt command under SHELL BUILTIN  COMMANDS  below).   This  can
+       have unwanted side effects if escaped portions of the string appear within command substitution or contain characters special to word expansion.
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../comparison/" class="btn btn-neutral float-left" title="Comparison with other available tools"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../firefox/" class="btn btn-neutral float-right" title="Firefox">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../portal/" class="btn btn-neutral float-left" title="Transparent Command Portal"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../compression/" class="btn btn-neutral float-right" title="Compression">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -162,10 +202,10 @@ remains clean.</p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../comparison/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../portal/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../firefox/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../compression/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>fim-root - FlatImage Documentation</title>
+    <title>Binding - FlatImage Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "fim-root";
-        var mkdocs_page_input_path = "cmd/root.md";
+        var mkdocs_page_name = "Binding";
+        var mkdocs_page_input_path = "configuration/binding.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -56,30 +56,22 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Commands</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">fim-root</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-is-it">What is it?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to Use</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it Works</a>
-    </li>
-    </ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/root/">fim-root</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../exec/">fim-exec</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/exec/">fim-exec</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../environment/">fim-env</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/environment/">fim-env</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../desktop/">fim-desktop</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/desktop/">fim-desktop</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../commit/">fim-commit</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/commit/">fim-commit</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../layer/">fim-layer</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/layer/">fim-layer</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../bind/">fim-bind</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/bind/">fim-bind</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../perms/">fim-perms</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/perms/">fim-perms</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Portal</span></p>
@@ -88,12 +80,16 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Configuration</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/prompt/">Prompt</a>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../prompt/">Prompt</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/compression/">Compression</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../compression/">Compression</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../configuration/binding/">Binding</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Binding</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#mangohud">MangoHud</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Architecture</span></p>
@@ -115,8 +111,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Commands</li>
-      <li class="breadcrumb-item active">fim-root</li>
+          <li class="breadcrumb-item">Configuration</li>
+      <li class="breadcrumb-item active">Binding</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -125,36 +121,32 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="execute-a-command-as-a-regular-user">Execute a command as a regular user</h1>
-<h2 id="what-is-it">What is it?</h2>
-<p><code>fim-root</code> executes a command as the root user inside the flatimage container.</p>
-<h2 id="how-to-use">How to Use</h2>
-<p>You can use <code>./app.flatimage fim-help root</code> to get the following usage details:</p>
-<pre><code class="language-txt">Flatimage - Portable Linux Applications
-fim-root:
-   Executes a command as the root user
-Usage:
-   fim-root program-name [program-args...]
-Example:
-   fim-root bash
+                <h1 id="binding">Binding</h1>
+<p>FlatImage allows to bind paths from the host to the container with the <code>fim-bind</code>
+command, this page shows examples of how to do it.</p>
+<h2 id="mangohud">MangoHud</h2>
+<p>Example with <code>arch.flatimage</code>:</p>
+<pre><code># Set permissions
+./arch.flatimage fim-perms add audio,wayland,xorg,gpu,network
+# Install drivers
+./arch.flatimage fim-root pacman -S --noconfirm vulkan-tools xf86-video-amdgpu vulkan-radeon lib32-vulkan-radeon xf86-video-intel vulkan-intel lib32-vulkan-intel
+# Bind mangohud vulkan layers
+./arch.flatimage fim-bind add ro /usr/share/vulkan /usr/share/vulkan
+# Bind mangohud libraries
+./arch.flatimage fim-bind add ro /usr/lib/mangohud /usr/lib/mangohud
+# Bind mangohud binaries
+./arch.flatimage fim-bind add ro /usr/bin /usr/local/bin
+# Update PATH
+./arch.flatimage fim-env set 'PATH=$PATH:/usr/local/bind'
+# Test the mangohud installation of the host, from inside the container
+./arch.flatimage fim-exec mangohud vkcube
 </code></pre>
-<p>To install a program in the container:</p>
-<pre><code class="language-bash"># Allow network access
-./app.flatimage fim-perms add network
-# Install firefox
-./app.flatimage fim-root pacman -S firefox
-</code></pre>
-<h2 id="how-it-works">How it Works</h2>
-<p>FlatImage uses <a href="https://github.com/containers/bubblewrap">bubblewrap</a> to execute
-commands inside a containerized environment, the programs are installed in an
-overlay filesystem localized in the same folder as the current flatimage. If the
-image is named <code>my-app</code>, the overlay filesystem is stored in <code>.my-app/overlays</code></p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../../examples/firefox/" class="btn btn-neutral float-left" title="Firefox"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../exec/" class="btn btn-neutral float-right" title="fim-exec">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../compression/" class="btn btn-neutral float-left" title="Compression"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../architecture/directories/" class="btn btn-neutral float-right" title="Directories">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -177,10 +169,10 @@ image is named <code>my-app</code>, the overlay filesystem is stored in <code>.m
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../../examples/firefox/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../compression/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../exec/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../../architecture/directories/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

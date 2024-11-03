@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>fim-desktop - FlatImage Documentation</title>
+    <title>Directories - FlatImage Documentation</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "fim-desktop";
-        var mkdocs_page_input_path = "cmd/desktop.md";
+        var mkdocs_page_name = "Directories";
+        var mkdocs_page_input_path = "architecture/directories.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -56,30 +56,22 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Commands</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../root/">fim-root</a>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/root/">fim-root</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../exec/">fim-exec</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/exec/">fim-exec</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../environment/">fim-env</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/environment/">fim-env</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">fim-desktop</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-is-it">What is it?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to Use</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#how-it-works">How it Works</a>
-    </li>
-    </ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/desktop/">fim-desktop</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../commit/">fim-commit</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/commit/">fim-commit</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../layer/">fim-layer</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/layer/">fim-layer</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../bind/">fim-bind</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/bind/">fim-bind</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../perms/">fim-perms</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../../cmd/perms/">fim-perms</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Portal</span></p>
@@ -97,8 +89,16 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Architecture</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../architecture/directories/">Directories</a>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Directories</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#structure-and-environment">Structure and Environment</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-app-directory">The app Directory</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-run-directory">The run Directory</a>
+    </li>
+    </ul>
                   </li>
               </ul>
       </div>
@@ -115,8 +115,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Commands</li>
-      <li class="breadcrumb-item active">fim-desktop</li>
+          <li class="breadcrumb-item">Architecture</li>
+      <li class="breadcrumb-item active">Directories</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -125,72 +125,55 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="desktop-integration">Desktop Integration</h1>
-<h2 id="what-is-it">What is it?</h2>
-<p>The desktop integration allows flatimage programs to integrate themselves into the
-start menu, show the application icon in the file manager and also define its
-own mimetype.</p>
-<h2 id="how-to-use">How to Use</h2>
-<p><strong>Configure</strong></p>
-<p>You can use <code>./app.flatimage fim-help desktop</code> to get the following usage details:</p>
-<pre><code>fim-desktop:
-   Configure the desktop integration
-Usage:
-   fim-desktop setup &lt;json-file&gt;
-   fim-desktop enable &lt;items...&gt;
-items:
-   entry,mimetype,icon
-Example:
-   fim-desktop enable entry,mimetype,icon
+                <h1 id="directories">Directories</h1>
+<h2 id="structure-and-environment">Structure and Environment</h2>
+<p>The snippet below represents the structure of the flatimage temporary files
+directory located in <code>/tmp/fim</code>, the corresponding environment variable is
+shown between <code>[]</code>.</p>
+<pre><code>/tmp/fim [FIM_DIR_GLOBAL]
+    ├── app
+    │    └── app_id [FIM_DIR_APP]
+    │        ├── bin [FIM_DIR_APP_BIN]
+    │        └── instance
+    │            └── instance_id [FIM_DIR_INSTANCE]
+    │                └── mount [FIM_DIR_MOUNT]
+    │                    ├── layers
+    │                    │   ├── 0
+    │                    │   ├── 1
+    │                    │   ├── ...
+    │                    │   └── n
+    │                    └── overlayfs
+    │
+    └── run [FIM_DIR_RUNTIME]
+        └── host [FIM_DIR_RUNTIME_HOST]
 </code></pre>
-<p>To setup the desktop integration for a flatimage package, the first step is to
-create a <code>json</code> file with the integration data, assume we create a file named
-<code>desktop.json</code> with the following contents:</p>
-<pre><code class="language-json">{
-  &quot;name&quot;: &quot;MyApp&quot;,
-  &quot;icon&quot;: &quot;./my_app.png&quot;,
-  &quot;categories&quot;: [&quot;System&quot;,&quot;Audio&quot;]
-}
-</code></pre>
-<p>This example creates the integration data for the application <code>MyApp</code>, with the
-icon file <code>my_app.png</code> located in the same folder as <code>desktop.json</code>. The
-categories field is used for the desktop menu entry integration, a list of valid
-categories is found
-<a href="https://specifications.freedesktop.org/menu-spec/latest/category-registry.html#main-category-registry">here</a>.
-Let's assume the json file is called <code>desktop.json</code> and the flatimage file is
-called <code>app.flatimage</code>, the next command uses the <code>desktop.json</code> file to
-configure the desktop integration.</p>
-<pre><code class="language-bash">$ ./app.flatimage fim-desktop setup ./desktop.json
-</code></pre>
-<p>After the setup step, you can enable the integration selectively, <code>entry</code> refers
-to the desktop entry in the start menu, <code>mimetype</code> refers to the file type that
-appears in the file manager, <code>icon</code> is the application icon shown in the start
-menu and the file manager. Here's how to enable everything:</p>
-<pre><code class="language-bash">$ ./app.flatimage fim-desktop enable entry,mimetype,icon
-</code></pre>
-<p><strong>Erase entries</strong></p>
-<p>To erase all desktop entries and icons created by flatimage, you can use the
-command:</p>
-<pre><code class="language-bash">$ find ~/.local/share -iname &quot;*flatimage*&quot; -exec rm -v &quot;{}&quot; \;
-</code></pre>
-<p><strong>xdg-open</strong></p>
-<p>Flatimage redirects <code>xdg-open</code> commands to the host machine</p>
-<p>Examples:</p>
+<h2 id="the-app-directory">The <code>app</code> Directory</h2>
 <ul>
-<li>Open a video file with the host default video player: <code>xdg-open my-file.mkv</code></li>
-<li>Open a link with the host default browser: <code>xdg-open www.google.com</code></li>
+<li><code>/tmp/fim/app</code> is a directory containing data of flatimage applications,
+each application has its own <code>id</code> that represents a specific build, for example,
+<code>119216d_20241019145954</code> is a build of commit <code>119216d</code> from <code>2024-10-19</code> (YYYY-MM-DD)
+built at <code>14h 59m 54s</code>.</li>
+<li><code>/tmp/fim/app/app_id</code> is used to store <code>binaries</code> and create <code>instances</code> of
+flatimage applications.</li>
+<li><code>/tmp/fim/app/app_id/bin</code> contains static binaries for the current flatimage
+build.</li>
+<li><code>/tmp/fim/app/app_id/instance</code> contains instances of the current flatimage
+build, these instances share the binaries located in <code>/tmp/fim/app/app_id/bin</code>.</li>
+<li><code>/tmp/fim/app/app_id/instance/instance_id</code> contains the
+read-only layer mountpoints and overlayfs mountpoint over all the layers
+from <code>0</code> to <code>n</code>. The <code>id</code> for the <code>instance_id</code> directory is generated from a
+call to <code>mkdtemp</code> with the template <code>XXXXXX</code>.</li>
 </ul>
-<h2 id="how-it-works">How it Works</h2>
-<p>FlatImage installs desktop entries in <code>$HOME/.local/share/applications</code>, icons
-are installed in <code>$HOME/.local/share/icons</code> and mimetypes are installed in
-<code>$HOME/.local/share/mime</code>. The user must define <code>XDG_DATA_HOME</code> to <code>$HOME/.local/share</code>
-or <code>XDG_DATA_DIRS</code> to contain the path <code>$HOME/.local/share</code>.</p>
+<h2 id="the-run-directory">The <code>run</code> Directory</h2>
+<p>The run directory contains <code>read-only</code> access to the host filesystem, it is only
+accessible from inside the container and can be used to create symlinks for
+libraries, sockets and more. This directory is used by the <code>gpu</code> permission to
+symlink nvidia drivers.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../environment/" class="btn btn-neutral float-left" title="fim-env"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../commit/" class="btn btn-neutral float-right" title="fim-commit">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../configuration/binding/" class="btn btn-neutral float-left" title="Binding"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -213,10 +196,8 @@ or <code>XDG_DATA_DIRS</code> to contain the path <code>$HOME/.local/share</code
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../environment/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../../configuration/binding/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="../commit/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
