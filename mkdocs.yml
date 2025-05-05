@@ -7,6 +7,7 @@ nav:
     - Steam: examples/steam.md
     - Firefox: examples/firefox.md
   - Commands:
+    - fim-boot: cmd/boot.md
     - fim-root: cmd/root.md
     - fim-exec: cmd/exec.md
     - fim-env: cmd/environment.md
