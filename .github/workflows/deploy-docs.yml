@@ -1,0 +1,58 @@
+name: Deploy Documentation to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout docs repository
+        uses: actions/checkout@v4
+        with:
+          repository: flatimage/flatimage-staging
+          token: ${{ secrets.DOCS }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build documentation with Docker
+        run: |
+          cd /home/runner/work/docs-staging/docs-staging
+          docker build -f docker/Dockerfile.mkdocs -t flatimage-docs .
+
+      - name: Extract site from Docker container
+        run: |
+          # Create a container from the image
+          docker create --name docs-container flatimage-docs
+
+          # Copy the site directory from the container
+          docker cp docs-container:/flatimage/site ./site
+
+          # Clean up the container
+          docker rm docs-container
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
