@@ -27,6 +27,10 @@ jobs:
       - name: Build documentation with Docker
         run: |
           cd /home/runner/work/docs/docs
+          # Use README.md as index
+          rm doc/mkdocs/docs/index.md
+          cp README.md doc/mkdocs/docs/index.md
+          # Build docker
           docker build -f docker/Dockerfile.mkdocs -t flatimage-docs .
 
       - name: Extract site from Docker container
