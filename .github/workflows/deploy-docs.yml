@@ -19,7 +19,7 @@ jobs:
       - name: Checkout docs repository
         uses: actions/checkout@v4
         with:
-          repository: flatimage/flatimage-staging
+          repository: flatimage/flatimage
           token: ${{ secrets.DOCS }}
 
       - name: Set up Docker Buildx
