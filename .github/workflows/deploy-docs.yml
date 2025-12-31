@@ -26,7 +26,7 @@ jobs:
 
       - name: Build documentation with Docker
         run: |
-          cd /home/runner/work/docs-staging/docs-staging
+          cd /home/runner/work/docs/docs
           docker build -f docker/Dockerfile.mkdocs -t flatimage-docs .
 
       - name: Extract site from Docker container
